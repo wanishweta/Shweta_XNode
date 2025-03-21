@@ -1,0 +1,24 @@
+[2025-03-20T09:39:44.441-0700] {processor.py:186} INFO - Started process (PID=64034) to work on /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py
+[2025-03-20T09:39:44.442-0700] {processor.py:914} INFO - Processing file /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py for tasks to queue
+[2025-03-20T09:39:44.444-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.443-0700] {dagbag.py:588} INFO - Filling up the DagBag from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py
+[2025-03-20T09:39:44.469-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.468-0700] {example_python_operator.py:93} WARNING - The virtalenv_python example task requires virtualenv, please install it.
+[2025-03-20T09:39:44.473-0700] {processor.py:925} INFO - DAG(s) 'example_python_operator' retrieved from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py
+[2025-03-20T09:39:44.720-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.720-0700] {override.py:1930} INFO - Created Permission View: can read on DAG:example_python_operator
+[2025-03-20T09:39:44.731-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.731-0700] {override.py:1930} INFO - Created Permission View: can delete on DAG:example_python_operator
+[2025-03-20T09:39:44.737-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.736-0700] {override.py:1930} INFO - Created Permission View: can edit on DAG:example_python_operator
+[2025-03-20T09:39:44.744-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.744-0700] {override.py:1930} INFO - Created Permission View: can read on DAG Run:example_python_operator
+[2025-03-20T09:39:44.749-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.749-0700] {override.py:1930} INFO - Created Permission View: can delete on DAG Run:example_python_operator
+[2025-03-20T09:39:44.755-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.755-0700] {override.py:1930} INFO - Created Permission View: can create on DAG Run:example_python_operator
+[2025-03-20T09:39:44.760-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.760-0700] {override.py:1930} INFO - Created Permission View: menu access on DAG Run:example_python_operator
+[2025-03-20T09:39:44.761-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.761-0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-03-20T09:39:44.774-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.774-0700] {dag.py:3262} INFO - Creating ORM DAG for example_python_operator
+[2025-03-20T09:39:44.775-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:44.774-0700] {dag.py:4180} INFO - Setting next_dagrun for example_python_operator to None, run_after=None
+[2025-03-20T09:39:44.791-0700] {processor.py:208} INFO - Processing /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py took 0.354 seconds
+[2025-03-20T09:42:43.151-0700] {processor.py:186} INFO - Started process (PID=64215) to work on /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py
+[2025-03-20T09:42:43.153-0700] {processor.py:914} INFO - Processing file /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py for tasks to queue
+[2025-03-20T09:42:43.154-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:42:43.154-0700] {dagbag.py:588} INFO - Filling up the DagBag from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py
+[2025-03-20T09:42:43.180-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:42:43.180-0700] {example_python_operator.py:93} WARNING - The virtalenv_python example task requires virtualenv, please install it.
+[2025-03-20T09:42:43.183-0700] {processor.py:925} INFO - DAG(s) 'example_python_operator' retrieved from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py
+[2025-03-20T09:42:43.299-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:42:43.299-0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-03-20T09:42:43.377-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:42:43.377-0700] {dag.py:4180} INFO - Setting next_dagrun for example_python_operator to None, run_after=None
+[2025-03-20T09:42:43.397-0700] {processor.py:208} INFO - Processing /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_python_operator.py took 0.248 seconds

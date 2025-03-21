@@ -1,0 +1,29 @@
+[2025-03-20T09:39:36.636-0700] {processor.py:186} INFO - Started process (PID=64026) to work on /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:39:36.637-0700] {processor.py:914} INFO - Processing file /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2025-03-20T09:39:36.638-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:36.638-0700] {dagbag.py:588} INFO - Filling up the DagBag from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:39:36.655-0700] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:39:37.408-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.407-0700] {override.py:1930} INFO - Created Permission View: can edit on DAG:example_sensors
+[2025-03-20T09:39:37.419-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.418-0700] {override.py:1930} INFO - Created Permission View: can delete on DAG:example_sensors
+[2025-03-20T09:39:37.425-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.424-0700] {override.py:1930} INFO - Created Permission View: can read on DAG:example_sensors
+[2025-03-20T09:39:37.433-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.433-0700] {override.py:1930} INFO - Created Permission View: menu access on DAG Run:example_sensors
+[2025-03-20T09:39:37.441-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.440-0700] {override.py:1930} INFO - Created Permission View: can create on DAG Run:example_sensors
+[2025-03-20T09:39:37.447-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.447-0700] {override.py:1930} INFO - Created Permission View: can delete on DAG Run:example_sensors
+[2025-03-20T09:39:37.454-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.453-0700] {override.py:1930} INFO - Created Permission View: can read on DAG Run:example_sensors
+[2025-03-20T09:39:37.455-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.454-0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-03-20T09:39:37.468-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.468-0700] {dag.py:3262} INFO - Creating ORM DAG for example_sensors
+[2025-03-20T09:39:37.469-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:39:37.469-0700] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2025-03-20T09:39:37.486-0700] {processor.py:208} INFO - Processing /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py took 0.853 seconds
+[2025-03-20T09:42:34.715-0700] {processor.py:186} INFO - Started process (PID=64211) to work on /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:42:34.717-0700] {processor.py:914} INFO - Processing file /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2025-03-20T09:42:34.718-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:42:34.718-0700] {dagbag.py:588} INFO - Filling up the DagBag from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:42:34.734-0700] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:42:35.757-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:42:35.757-0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-03-20T09:42:35.767-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:42:35.767-0700] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2025-03-20T09:42:35.783-0700] {processor.py:208} INFO - Processing /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py took 1.070 seconds
+[2025-03-20T09:45:28.710-0700] {processor.py:186} INFO - Started process (PID=64378) to work on /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:45:28.711-0700] {processor.py:914} INFO - Processing file /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py for tasks to queue
+[2025-03-20T09:45:28.713-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:45:28.712-0700] {dagbag.py:588} INFO - Filling up the DagBag from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:45:28.729-0700] {processor.py:925} INFO - DAG(s) 'example_sensors' retrieved from /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py
+[2025-03-20T09:45:30.009-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:45:30.009-0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-03-20T09:45:30.018-0700] {logging_mixin.py:190} INFO - [2025-03-20T09:45:30.018-0700] {dag.py:4180} INFO - Setting next_dagrun for example_sensors to None, run_after=None
+[2025-03-20T09:45:30.034-0700] {processor.py:208} INFO - Processing /Users/shwetawani/Documents/XNode Project/XNode_project/.venv/lib/python3.12/site-packages/airflow/example_dags/example_sensors.py took 1.327 seconds
