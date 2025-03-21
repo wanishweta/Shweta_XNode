@@ -1,0 +1,6 @@
+datasources:
+  my_datasource:
+    class_name: Datasource
+    module_name: great_expectations.datasource
+    execution_engine:
+      class_name: PandasExecutionEngine
