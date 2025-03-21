@@ -1,0 +1,7 @@
+alert: HighKafkaConsumerLag
+expr: kafka_consumer_lag{consumer_group="transactiongroup"} > 1000
+for: 5m
+labels:
+  severity: critical
+annotations:
+  description: "Consumer group {{ $labels.consumer_group }} has a lag over 1000 for 5 minutes."
