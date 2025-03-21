@@ -1,0 +1,4 @@
+kafka-python==2.0.2
+great_expectations
+apache-airflow-providers-apache-spark
+pyspark
