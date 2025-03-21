@@ -1,0 +1,303 @@
+Schema design
+
+
+Transactions  				— Kafka (deduplication logic)
+Securities					— Metadata (pre populated)
+Regions						— Metadata  (pre populated)
+transaction_summary			— ETL job triggered once at the end of day (transformation)
+
+historical_prices				— ETL job triggered once at the end of day (transformation)
+asset_performance_metrics	— ETL job triggered once at the end of day (transformation)
+
+
+
+transaction_metrics			— TBD
+anomaly_detection			— TBD
+
+
+========================================
+
+
+Transactions
+This table will capture detailed information about each transaction.
+Extract transactional data from various sources like trading systems, data providers, etc.
+
+In the context of financial asset management, the Transactions Table will be modified to include valid time and transaction time for each transaction. This enables tracking of when the data was valid and when it was recorded in the system.
+Column Name
+Data Type
+Description
+transaction_id
+UUID / INT
+Unique identifier for the transaction
+transaction_date
+DATE / TIMESTAMP
+Date when the transaction occurred (valid time)
+security_id
+UUID
+Reference to the security (foreign key to Securities)
+region_id
+UUID
+Reference to the region (foreign key to Regions)
+trade_volume
+DECIMAL (20, 5)
+Number of units traded
+trade_value
+DECIMAL (20, 5)
+Dollar value of the trade
+security_type
+VARCHAR
+Type of security (e.g., stock, bond, ETF)
+trade_type
+VARCHAR
+Type of trade (buy/sell)
+price_per_unit
+DECIMAL (20, 5)
+Price per unit of the security
+valid_from
+TIMESTAMP
+Timestamp indicating when this data record became valid (valid time)
+valid_to
+TIMESTAMP
+Timestamp indicating when this data record was no longer valid (valid time)
+transaction_from
+TIMESTAMP
+Timestamp when the data was entered into the system (transaction time)
+transaction_to
+TIMESTAMP
+Timestamp when the data record was deleted or updated in the system (transaction time)
+Explanation:
+	•	valid_from and valid_to track when the transaction was valid in the real world (i.e., when the transaction was executed and when it was valid).
+	•	transaction_from and transaction_to track when the transaction data was entered or updated in the system.
+	•	transaction_date could be considered part of the valid time dimension, and transaction_from or transaction_to will be part of the transaction time.
+
+
+Securities
+
+This table provides metadata about the security, which will help group transactions by security type.
+Column Name
+Data Type
+Description
+security_id
+UUID
+Unique identifier for the security
+security_name
+VARCHAR
+Name of the security
+security_type
+VARCHAR
+Type of the security (e.g., stock, bond, ETF, etc.)
+sector
+VARCHAR
+The sector the security belongs to (e.g., technology, finance)
+
+Regions
+
+This table will store metadata about regions, which will allow you to filter and analyze transactions by geography.
+Column Name
+Data Type
+Description
+region_id
+UUID
+Unique identifier for the region
+region_name
+VARCHAR
+Name of the region (e.g., North America, Europe, APAC)
+country
+VARCHAR
+Country within the region
+
+
+Transaction Summary
+
+
+For faster reporting and analysis, especially for large volumes of data, it’s helpful to create an aggregated table summarizing transaction volumes by security type and region.
+Column Name
+Data Type
+Description
+transaction_date
+DATE
+Date of the aggregated data
+security_type
+VARCHAR
+Type of security (e.g., stock, bond, ETF)
+region_name
+VARCHAR
+Name of the region
+total_trade_volume
+DECIMAL (20, 5)
+Total number of units traded
+total_trade_value
+DECIMAL (20, 5)
+Total dollar value of trades
+
+You can create an ETL job to populate this summary table at the end of each day or at regular intervals.
+
+
+—————————————————————
+
+2. Asset Performance Over Time (ROI, Volatility)
+
+
+Schema Design for Asset Performance
+1. Historical Prices Table:
+This table tracks the historical prices of securities over time.
+Column Name
+Data Type
+Description
+security_id
+UUID
+Unique identifier for the security
+date
+DATE
+Date of the price record
+closing_price
+DECIMAL (20, 5)
+Closing price of the security on that date
+open_price
+DECIMAL (20, 5)
+Opening price of the security on that date
+high_price
+DECIMAL (20, 5)
+Highest price of the security on that date
+low_price
+DECIMAL (20, 5)
+Lowest price of the security on that date
+
+2. Asset Performance Metrics Table:
+This table stores pre-calculated performance metrics such as ROI and volatility.
+Transform the data, perform necessary calculations for ROI, volatility, and anomaly detection, and load it into the above tables.
+Use windowed processing to calculate rolling ROI and volatility for the asset performance metrics table.
+
+For asset performance metrics (e.g., ROI, volatility), the table must also store bi-temporal data, allowing the user to track the performance over time and understand when the performance was valid versus when the data was recorded or updated.
+Column Name
+Data Type
+Description
+performance_id
+UUID
+Unique identifier for the performance record
+security_id
+UUID
+Reference to the security (foreign key to Securities)
+start_date
+DATE
+Start date of the performance calculation period (valid time)
+end_date
+DATE
+End date of the performance calculation period (valid time)
+roi
+DECIMAL (20, 5)
+Return on Investment over the period
+volatility
+DECIMAL (20, 5)
+Volatility (standard deviation of returns) over the period
+sharpe_ratio
+DECIMAL (20, 5)
+Sharpe ratio for the asset (optional)
+valid_from
+TIMESTAMP
+Timestamp when the performance data was valid (valid time)
+valid_to
+TIMESTAMP
+Timestamp when the performance data was no longer valid (valid time)
+transaction_from
+TIMESTAMP
+Timestamp when the performance data was entered into the system (transaction time)
+transaction_to
+TIMESTAMP
+Timestamp when the performance data was deleted or updated in the system (transaction time)
+Explanation:
+	•	The performance data is bi-temporal, with valid time reflecting when the performance data is true, and transaction time reflecting when the performance data was logged or updated in the system.
+
+
+
+You can calculate ROI (Return on investment) as:
+sql
+Copy
+roi = (end_price - start_price) / start_price.  (Selling price - buy price) / buy price
+
+And volatility as the standard deviation of returns (daily, weekly, etc.) over the period.
+
+————————————
+
+3. Anomalies in Transaction Patterns
+
+
+Schema Design for Anomaly Detection
+1. Transaction Metrics Table:
+This table stores aggregated transaction metrics for each security and region over time, which can be used for anomaly detection.
+
+Use statistical methods or machine learning models to detect anomalies in transaction patterns based on the transaction metrics table.
+
+
+Column Name
+Data Type
+Description
+security_id
+UUID
+Unique identifier for the security
+region_id
+UUID
+Unique identifier for the region
+date
+DATE
+Date of the aggregated data
+average_trade_volume
+DECIMAL (20, 5)
+Average trade volume per day for the security
+max_trade_volume
+DECIMAL (20, 5)
+Maximum trade volume for the security on that day
+trade_volume_std_dev
+DECIMAL (20, 5)
+Standard deviation of trade volume
+2. Anomaly Detection Table:
+This table records detected anomalies based on deviations from typical trading patterns.
+Use statistical methods like z-scores, moving averages, or more advanced machine learning models like Isolation Forest, Autoencoders, or K-Means Clustering to identify unusual patterns in trading data.
+
+To track anomalies in transaction patterns, the anomaly table also needs to store both valid time and transaction time.
+Column Name
+Data Type
+Description
+anomaly_id
+UUID
+Unique identifier for the anomaly record
+security_id
+UUID
+Reference to the security (foreign key to Securities)
+region_id
+UUID
+Reference to the region (foreign key to Regions)
+date
+DATE
+Date of the detected anomaly (valid time)
+anomaly_type
+VARCHAR
+Type of anomaly (e.g., high volume, price spike, etc.)
+anomaly_score
+DECIMAL (20, 5)
+A score representing the severity of the anomaly
+description
+VARCHAR
+Description of the anomaly
+valid_from
+TIMESTAMP
+Timestamp when the anomaly data was valid (valid time)
+valid_to
+TIMESTAMP
+Timestamp when the anomaly data was no longer valid (valid time)
+transaction_from
+TIMESTAMP
+Timestamp when the anomaly data was entered into the system (transaction time)
+transaction_to
+TIMESTAMP
+Timestamp when the anomaly data was deleted or updated in the system (transaction time)
+Explanation:
+	•	The anomaly detection records are bi-temporal, tracking when the anomaly was valid (valid time) and when it was recorded in the system (transaction time).
+	•	valid_from and valid_to allow you to understand the period during which the anomaly was considered true or valid.
+	•	transaction_from and transaction_to help track when the anomaly data was entered, modified, or deleted.
+
+
+
+
+
+

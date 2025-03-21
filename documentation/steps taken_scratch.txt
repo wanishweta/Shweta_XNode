@@ -1,0 +1,293 @@
+Steps for execution -
+
+Pip install -r requirements.txt
+
+zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
+kafka-server-start.sh $KAFKA_HOME/config/server.properties      (new terminal window)
+
+kafka-console-producer.sh --bootstrap-server localhost:9092 --topic transactionlog
+
+Execute python3 producer.py     (in Kafka folder of project)
+
+Execute load_transactionlog.py
+
+
+————
+
+Kafka setup
+
+
+Install Kafka
+Set up $KAFKA_HOME and update $PATH to point to Kafka bin
+
+zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
+kafka-server-start.sh $KAFKA_HOME/config/server.properties      (new terminal window)
+
+
+Create topic (new terminal window)
+kafka-topics.sh --create --zookeeper localhost:2181 -- replication-factor 1 -- partitions 1 --topic transactionlog
+
+kafka-topics.sh --create --topic transactionlog --bootstrap-server localhost:2181 --partitions 1 --replication-factor 1
+
+kafka-console-producer.sh --bootstrap-server localhost:9092 --topic transactionlog
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic transactionlog --from-beginning
+
+
+
+Topic transactionlog created successfully
+
+————————————
+
+Producer simulation in Kafka using CSV file
+
+pip install confluent-kafka
+
+Script name - producer.py   created successfully
+Execute python3 producer.py     (in Kafka folder of project)
+
+
+
+————————————
+
+Pyspark script to read from Kafka topic
+
+pip install pyspark
+Execute load_transactionlog.py
+
+———————
+
+Snowflake schema creation
+
+Download snowsql
+Developers.snowflake.com - download snowsql for MacOS
+
+In new terminal window, execute
+Snowsql —version
+
+Snowflake GUI
+
+Full name - Demo User
+Name of organization - swhome.retool.com
+Work email - wani.shweta.s@gmail.com
+Account - https://swaccount.snowflakecomputing.com
+Account name - YP65809
+
+
+Create snowflake account
+User - demo
+Pass - Snowflake@1234567
+
+Test connection
+snowsql -a JHAVVFU-YP65809 -u DEMO
+
+Now go to UI and create my_database and my_schema
+
+
+Complete the following steps to connect to Snowflake:
+	1.	Open a new terminal window.
+	2.	Execute the following command to test your connection: snowsql -a <account_name> -u <login_name> Enter your password when prompted. Enter !quit to quit the connection.
+	3.	Add your connection information to the ~/.snowsql/config file: accountname = <account_name> username = <user_name> password = <password>
+	4.	Execute the following command to connect to Snowflake: snowsql or double click the SnowSQL application icon in the Applications directory.
+
+
+
+
+pip install snowflake-connector-python
+
+sudo python3 -m pip install setuptools-rust
+sudo python3 -m pip install wheel
+sudo python3 -m pip install -r https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v2.3.9/tested_requirements/requirements_36.reqs
+sudo python3 -m pip install snowflake-connector-python==2.3.9
+
+
+—————————————
+
+Docker setup
+
+
+Download docker desktop for Mac Intel chip from website
+Install by clicking dmg
+
+In Finder window, Applications —> Docker.  Double click to start docker desktop
+
+User : swdemouser
+Email: wani.shweta.s@gmail.com
+
+Build and run docker container
+
+Create 2 files in Kafka folder
+Docker
+docker_compose.yml
+
+
+Browse to folder containing Dockerfile —> in Kafka folder of project and open terminal there to execute below
+docker build -t kafka-zookeeper-producer .
+
+docker rename kafka-zookeeper-producer kafka-zookeeper-producer-old5
+
+
+docker run -d --name kafka-zookeeper-producer kafka-zookeeper-producer
+
+docker logs kafka-zookeeper-producer
+
+
+To stop the container
+docker stop kafka-zookeeper-producer
+
+————————
+
+Kafka Snowflake connector jars
+
+
+wget https://repo1.maven.org/maven2/net/snowflake/spark-snowflake_2.12/2.16.0-spark_3.4/spark-snowflake_2.12-2.16.0-spark_3.4.jar -P "/Users/shwetawani/Documents/XNode Project/XNode_project/jars"
+
+
+Old config
+"/Users/shwetawani/Documents/XNode Project/XNode_project/jars/spark-snowflake_2.12-2.16.0-spark_3.4.jar,/Users/shwetawani/Documents/XNode Project/XNode_project/jars/snowflake-jdbc-3.12.6.jar") \
+
+
+
+
+
+————————————
+
+Great expectations
+
+pip install great_expectations
+
+——————————————
+
+Airflow
+
+
+pip install apache-airflow-providers-apache-spark
+
+
+
+Start spark master in bash
+$SPARK_HOME/sbin/start-master.sh
+
+Open SparkUI on http://localhost:8080
+
+
+—————————————
+
+Spark
+
+Start master on 8081
+ $SPARK_HOME/sbin/start-master.sh --webui-port 8081
+
+Spark master on —> http://localhost:8081/
+
+
+Stop master
+$SPARK_HOME/sbin/stop-master.sh
+
+
+
+Airflow on
+	http://localhost:8080/home
+
+
+—————————————
+
+Prometheus set up
+
+
+For Kafka monitoring
+
+
+Set up Prometheus
+wget https://github.com/prometheus/prometheus/releases/download/v2.44.0/prometheus-2.44.0.linux-amd64.tar.gz -P "/Users/shwetawani/Documents/XNode Project/XNode_project/jars"
+wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz -P "/Users/shwetawani/Documents/XNode Project/XNode_project/jars"
+
+
+/tar -xvzf  “Users/shwetawani/Documents/XNode Project/XNode_project/jars/prometheus-2.44.0.linux-amd64.tar.gz”
+
+/tar -xvzf  prometheus-2.45.0.linux-amd64.tar.gz.  — take Darwin for MacOS
+
+
+./prometheus --config.file=prometheus.yml
+Localhost:9090.  Dashboard will be seen
+Localhost:9090/targets.
+
+
+To restart prometheus
+
+sudo lsof -i :9308
+Kill <PID>
+
+Browse to path
+
+ docker pull danielqsj/kafka-exporter
+
+
+docker run -d -p 9308:9308 --name kafka-exporter \
+  -e KAFKA_SERVER=localhost:9092 \
+  danielqsj/kafka-exporter
+
+
+Unzip exporter tar and execute below
+
+./kafka_exporter --kafka.server=localhost:9092
+
+
+Go to localhost.  http://localhost:9308/metrics.  OR http://localhost:9308/ to open Kafka exporter
+
+
+Add below to prometheus configuration.yml file
+
+scrape_configs:
+  - job_name: 'kafka'
+    static_configs:
+      - targets: [‘localhost:9308']
+
+
+
+Create consumer_group in Kafka
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic transactionlog --group transactiongroup
+
+
+
+————
+
+For Spark monitoring
+
+
+
+
+
+
+Grafana setup
+
+
+
+
+—————————
+
+
+Final Execution Demo
+
+
+
+To start Kafka
+
+zookeeper-server-start.sh $KAFKA_HOME/config/zookeeper.properties
+kafka-server-start.sh $KAFKA_HOME/config/server.properties  (new terminal window)
+
+
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic transactionlog --group transactiongroup
+
+
+Execute python3 producer.py     (in Kafka folder of project)
+
+
+—
+
+Start prometheus browse to jar file
+./prometheus --config.file=prometheus.yml
+
+
+
+
+
